@@ -1,5 +1,4 @@
 'use strict';
-import {getIUTLoc} from './ip.js';
 
 async function fetchMaxPage(page = 1, pageSize = 50) {
     const url = 'https://tabular-api.data.gouv.fr/api/resources/2963ccb5-344d-4978-bdd3-08aaf9efe514/data/?page=' + page + '&page_size=' + pageSize;
