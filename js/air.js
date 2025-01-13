@@ -25,7 +25,6 @@ async function getAirQuality(city) {
 
 async function addAirQuality(ville) {
     const airQuality = await getAirQuality(ville);
-    console.log(airQuality);
 
     const airQualityEl= document.getElementById('air');
     airQualityEl.innerHTML = "Air : " + airQuality.lib_qual;

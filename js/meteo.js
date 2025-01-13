@@ -2,10 +2,8 @@
 
 async function getWeather(ipInfo) {
     const url = 'https://www.infoclimat.fr/public-api/gfs/json?_ll='+ipInfo.latitude+','+ipInfo.longitude+'&_auth=ARsDFFIsBCZRfFtsD3lSe1Q8ADUPeVRzBHgFZgtuAH1UMQNgUTNcPlU5VClSfVZkUn8AYVxmVW0Eb1I2WylSLgFgA25SNwRuUT1bPw83UnlUeAB9DzFUcwR4BWMLYwBhVCkDb1EzXCBVOFQoUmNWZlJnAH9cfFVsBGRSPVs1UjEBZwNkUjIEYVE6WyYPIFJjVGUAZg9mVD4EbwVhCzMAMFQzA2JRMlw5VThUKFJiVmtSZQBpXGtVbwRlUjVbKVIuARsDFFIsBCZRfFtsD3lSe1QyAD4PZA%3D%3D&_c=19f3aa7d766b6ba91191c8be71dd1ab2';
-    console.log(url);
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -55,7 +53,6 @@ async function addWeather(ipInfo) {
     const entries = Object.entries(weatherData);
     const data = [entries[8], entries[10], entries[12], entries[14]];
     const timeOfDay = ['Matinée', 'Midi', 'Soir', 'Nuit'];
-    console.log(data);
 
     weatherContainer.innerHTML = data.map((weatherData, index) => {
         return getWeatherHTML(weatherData[1], timeOfDay[index]);
