@@ -13,7 +13,7 @@ async function getIpLoc(){
 }
 
 
-async function getDepartmentFromLoc(lat, long) {
+async function getIUTLoc() {
     try {
         const response = await fetch('https://nominatim.openstreetmap.org/search?q=iut+nancy+charlemagne&format=json');
         return await response.json();
@@ -24,5 +24,5 @@ async function getDepartmentFromLoc(lat, long) {
 
 export {
     getIpLoc,
-    getDepartmentFromLoc
+    getIUTLoc
 }

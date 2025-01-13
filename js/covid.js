@@ -1,5 +1,5 @@
 'use strict';
-import {getDepartmentFromLoc} from './ip.js';
+import {getIUTLoc} from './ip.js';
 
 async function fetchMaxPage(page = 1, pageSize = 50) {
     const url = 'https://tabular-api.data.gouv.fr/api/resources/2963ccb5-344d-4978-bdd3-08aaf9efe514/data/?page=' + page + '&page_size=' + pageSize;
@@ -52,47 +52,6 @@ async function fetchSarsDataByDepartment(department, page = 1, pageSize = 50) {
     }
 }
 
-async function fetchSarsDataByIp (ipInfo) {
-    try {
-        const department = await getDepartmentFromLoc(ipInfo.latitude, ipInfo.longitude);
-        if (department) {
-            let i = 1;
-            let data = [];
-            while (true) {
-                let pageData = await fetchSarsDataByDepartment(department, i);
-                if (!pageData || pageData.length === 0) {
-                    break;
-                }
-                data = data.concat(pageData);
-                i++;
-            }
-            return {
-                department: department,
-                data: data
-            }
-        }
-    } catch (error) {
-        console.error('Erreur lors de la récupération des données:', error);
-    }
-}
-
-async function formatDataByHospitalization(data){
-    return data.map(item => ({
-        label: item.date,
-        value: item.hosp
-    }));
-}
-
-async function formatDataByPositiveCases(data){
-    return data.map(item => ({
-        label: item.date,
-        value: item.pos
-    }));
-}
-
 export {
     fetchAllMaxData,
-    fetchSarsDataByIp,
-    formatDataByHospitalization,
-    formatDataByPositiveCases
 }
